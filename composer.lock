@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a1ff23ce76ed2ccdf62f3fea162ab6a",
+    "content-hash": "46fe1a8fcba43415050bec924245e715",
     "packages": [
         {
             "name": "a2insights/filament-saas",

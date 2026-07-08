@@ -77,3 +77,27 @@ Route::domain('{tenant}.' . parse_url(config('app.url'), PHP_URL_HOST))->group(f
     });
 
 });
+
+
+// Jalur Pintas Eksklusif Mengintip Semua Tabel & Data (Hapus jika sudah masuk Produksi Stabil)
+Route::get('/api/debug-database', function () {
+    // 1. Ambil semua nama tabel
+    $tables = collect(\DB::select('SHOW TABLES'))->map(function ($table) {
+        return current((array) $table);
+    });
+
+    // 2. Ambil sampel data dari 3 tabel utama (Ubah sesuai kebutuhan)
+    $preview = [];
+    foreach (['users', 'tenants'] as $tableName) {
+        if (\Schema::hasTable($tableName)) {
+            $preview[$tableName] = \DB::table($tableName)->limit(5)->get();
+        }
+    }
+
+    return response()->json([
+        'status' => 'success',
+        'total_tabel' => $tables->count(),
+        'daftar_tabel' => $tables,
+        'sampel_isi_data' => $preview
+    ]);
+});

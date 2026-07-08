@@ -101,3 +101,31 @@ Route::get('/api/debug-database', function () {
         'sampel_isi_data' => $preview
     ]);
 });
+
+
+
+// ==========================================
+// 1. RUTE PUBLIK (Tanpa Bearer Token)
+// ==========================================
+
+/**
+ * Pengecekan Kesehatan Sistem (Health Check)
+ * Sangat berguna untuk memastikan server Laravel Cloud Anda aktif dan terhubung ke Database dengan aman.
+ */
+Route::get('/health-check', function () {
+    try {
+        \DB::connection()->getPdo();
+        return response()->json([
+            'status' => 'healthy',
+            'database' => 'connected',
+            'timestamp' => now()->toIso8601String(),
+            'environment' => app()->environment(),
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'unhealthy',
+            'database' => 'disconnected',
+            'error' => $e->getMessage(),
+        ], 500);
+    }
+});

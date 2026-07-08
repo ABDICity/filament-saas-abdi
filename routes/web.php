@@ -58,7 +58,7 @@ Route::post('/api/external-login', function (Request $request) {
 Route::get('/', function () {
     return response()->json([
         'aplikasi' => 'ABDI (Aplikasi Berjamaah Dakwah Islamicity)',
-        'gerakan' => '4B Kaffah (Belajar, Beribadah, Berinfak, Berbisnis)',
+        'gerakan' => '4B Kaffah (Berdakwah, Bersyariah, Berjamaah, Bermuamalah)',
         'manajemen' => 'ASRI (Aman, Sehat, Ringkas, Rapih, Resik, Rawat, Rajin, Indah)',
         'status' => 'Landing Page Global Aktif'
     ]);
